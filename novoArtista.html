@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="Artistas">
+<head>
+	<meta charset="UTF-8">
+	<title>Artistas favoritos</title>
+	
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="js/artistas.module.js"></script>
+	<script src="js/artistas.controller.js"></script>
+</head>
+<body>
+	<div class="container" ng-controller="ArtistasController">
+		<h1 class="secao">{{ titulo }}</h1>
+		
+		<div class="lista-filmes">
+			<div class="filme com-cartaz" ng-repeat="artista in artistas">
+				<h1>{{ artista.nome }}</h1>
+				<button class="del" title="Excluir" ng-click="removerArtista(artista.id)"></button>
+				<img ng-src="{{ artista.cartaz }}" alt="Cartaz de {{ artista.titulo }}">
+			</div>	
+		</div>
+
+		<hr>
+
+		<form class="form-filmes" ng-submit="adicionarArtista()">
+			<h1>Adicionar artista</h1>
+			<div class="form-campo">
+				<label for="nome">Nome</label>
+				<input type="text" id="nome" ng-model="novoArtista.nome">
+			</div>
+			<div class="form-campo">
+				<label for="foto">Url da foto</label>
+				<input type="text" id="cartaz" ng-model="novoFilme.cartaz">
+			</div>
+
+			<footer>
+				<button type="reset">Limpar</button>
+				<button type="submit">Salvar</button>
+			</footer>
+		</form>
+	</div>
+	
+</body>
+</html>
