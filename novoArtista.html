@@ -2,7 +2,7 @@
 <html ng-app="Artistas">
 <head>
 	<meta charset="UTF-8">
-	<title>Artistas favoritos</title>
+	<title>Filmes que já assisti</title>
 	
 	<link rel="stylesheet" href="css/style.css">
 
@@ -14,25 +14,49 @@
 	<div class="container" ng-controller="ArtistasController">
 		<h1 class="secao">{{ titulo }}</h1>
 		
-		<div class="lista-filmes">
+		<div class="lista">
 			<div class="filme com-cartaz" ng-repeat="artista in artistas">
 				<h1>{{ artista.nome }}</h1>
 				<button class="del" title="Excluir" ng-click="removerArtista(artista.id)"></button>
-				<img ng-src="{{ artista.cartaz }}" alt="Cartaz de {{ artista.titulo }}">
+				<button class= "fav" title="Favoritar Artista" ng-click="adicionarFavorito(artista.id)"></button>
+				<img ng-src="{{ artista.cartaz }}" alt="Cartaz de {{ artista.nome }}">
+				<ul>
+					<li><strong>Estilo musical:</strong> {{ artista.estilo }}</li>
+				</ul>
 			</div>	
 		</div>
 
 		<hr>
 
-		<form class="form-filmes" ng-submit="adicionarArtista()">
-			<h1>Adicionar artista</h1>
+		<div class="lista">
+			<div class="filme com-cartaz" ng-repeat="artista in artistasFavoritos">
+				<h1>{{ artista.nome }}</h1>
+				<button class="del" title="Desfavoritar" ng-click="desfavoritarArtista(artista.id)"></button>
+				<img ng-src="{{ artista.cartaz }}" alt="Cartaz de {{ artista.nome }}">
+				<ul>
+					<li><strong>Estilo musical:</strong> {{ artista.estilo }}</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+		<hr>
+
+		<form class="formularios" ng-submit="adicionarArtista()">
+			<h1>Adicionar Artista</h1>
 			<div class="form-campo">
-				<label for="nome">Nome</label>
+				<label for="nome">Nome do artista</label>
 				<input type="text" id="nome" ng-model="novoArtista.nome">
 			</div>
+			<div class="form-campo pequeno">
+				<label for="estilo">Estilo Musical</label>
+				<input type="text" id="estilo" ng-model="novoArtista.estilo">
+			</div>
+			
 			<div class="form-campo">
-				<label for="foto">Url da foto</label>
-				<input type="text" id="cartaz" ng-model="novoFilme.cartaz">
+				<label for="cartaz">Url da foto</label>
+				<input type="text" id="cartaz" ng-model="novoArtista.cartaz">
 			</div>
 
 			<footer>
@@ -40,6 +64,10 @@
 				<button type="submit">Salvar</button>
 			</footer>
 		</form>
+	</div>
+
+	<div class="voltar">
+		<form method="get" action="index.html"><button type="submit">Voltar</button></form>
 	</div>
 	
 </body>

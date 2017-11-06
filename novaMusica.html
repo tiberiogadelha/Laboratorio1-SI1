@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="Filmes">
+<html ng-app="Albuns">
 <head>
 	<meta charset="UTF-8">
 	<title>Filmes que já assisti</title>
@@ -7,16 +7,17 @@
 	<link rel="stylesheet" href="css/style.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-	<script src="js/filmes.module.js"></script>
-	<script src="js/filmes.controller.js"></script>
+	<script src="js/albuns.module.js"></script>
+	<script src="js/albuns.controller.js"></script>
 </head>
 <body>
-	<div class="container" ng-controller="FilmesController">
+	
+	<div class="container" ng-controller="AlbunsController">
 		<h1>{{ titulo }}</h1>
 		
-		<div class="lista-filmes">
-			<div class="filme com-cartaz" ng-repeat="filme in filmes">
-				<h1>{{ filme.titulo }}</h1>
+		<div class="lista">
+			<div class="filme com-cartaz" ng-repeat="album in albuns">
+				<h1>{{ album.nomeDoAlbum }}</h1>
 				<button class="del" title="Excluir" ng-click="removerFilme(filme.id)"></button>
 				<img ng-src="{{ filme.cartaz }}" alt="Cartaz de {{ filme.titulo }}">
 				<ul>
@@ -29,28 +30,30 @@
 
 		<hr>
 
-		<form class="form-filmes" ng-submit="adicionarFilme()">
-			<h1>Adicionar Filme</h1>
+		<form class="formularios" ng-submit="adicionarMusica()">
+			<h1>Adicionar Música</h1>
 			<div class="form-campo">
-				<label for="titulo">Título</label>
-				<input type="text" id="titulo" ng-model="novoFilme.titulo">
+				<label for="titulo">Titulo da música</label>
+				<input type="text" id="titulo" ng-model="novaMusica.titulo">
 			</div>
 			<div class="form-campo pequeno">
 				<label for="ano">Ano de Lançamento</label>
-				<input type="number" id="ano" ng-model="novoFilme.ano">
+				<input type="number" id="ano" ng-model="novoAlbum.anoDeLancamento">
 			</div>
 			<div class="form-campo medio">
-				<label for="produtora">Produtora</label>
-				<input type="text" id="produtora" ng-model="novoFilme.produtora">
+				<label for="artista">Artista</label>
+				<input type="text" id="artista" ng-model="novoAlbum.artista">
 			</div>
 			<div class="form-campo">
-				<label for="cartaz">Url do Cartaz</label>
-				<input type="text" id="cartaz" ng-model="novoFilme.cartaz">
+				<label for="cartaz">Album</label>
+				<input type="text" id="cartaz" ng-model="novoAlbum.nomeDoAlbum">
 			</div>
 			<div class="form-campo">
-				<label for="sinopse">Sinópse</label>
-				<textarea id="sinopse" rows="5" ng-model="novoFilme.sinopse"></textarea>
+				<label for="duracao">Duração</label>
+				<input type="text" id="duracao" ng-model="novaMusica.duracao">
 			</div>
+
+			
 
 			<footer>
 				<button type="reset">Limpar</button>
