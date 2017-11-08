@@ -83,18 +83,22 @@ button {
 	content: '\00D7';
 }
 
-.lista .fime .fav {
+.lista .filme .fav {
 	position: relative;
 	top: 1;
 	right: 2;
 	border: none;
-	background-color: transparent;
-	font-size: 20px;
-	line-height: 15px;
-	padding: 10px;
+	background-color: red;
+	font-size: 8px;
+	line-height: 10px;
+	padding: 8px;
 	font-weight: bold;
 	overflow: hidden;
-	color: #FC6E51;
+	color: white;
+}
+
+.lista .filme .fav:hover {
+	background-color: #A0D468;
 }
 
 .lista .filme img {
@@ -137,6 +141,7 @@ button {
 
 .formularios .form-campo {
 	margin-bottom: 10px;
+	border-radius: 5px;
 }
 
 .formularios .form-campo.pequeno input {

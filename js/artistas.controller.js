@@ -6,7 +6,8 @@ angular.module("Artistas").controller("ArtistasController", function($scope){
 			id: "123123123",
 			nome: "Elvis Presley",
 			estilo: "Rock",
-			cartaz: "http://www.elvis.com/assets/images/photos/elvis/1950s/INV16714.jpg"
+			cartaz: "http://www.elvis.com/assets/images/photos/elvis/1950s/INV16714.jpg",
+			albuns: []
 		}
 	];
 
@@ -31,6 +32,11 @@ angular.module("Artistas").controller("ArtistasController", function($scope){
 		artista.id = Date.now();
 
 		//Verifica se o artista ja foi adicionado ao sistema
+		if(!artista.nome) {
+			window.alert("Preencha ao menos o campo: nome do artista.");
+			return;
+		}
+
 		angular.forEach($scope.artistas, function(artista1){
 			if(artista1.nome == artista.nome){
 				seguro = "false";
@@ -40,6 +46,9 @@ angular.module("Artistas").controller("ArtistasController", function($scope){
 		//Adiciona o artista ao sistema
 		if(seguro == "ok"){
 			$scope.artistas.push(artista);
+			window.alert("Artista cadastrado com sucesso.")
+		} else {
+			window.alert("O artista já existe no sistema.")
 		}
 
 		$scope.novoArtista = {};
@@ -53,6 +62,7 @@ angular.module("Artistas").controller("ArtistasController", function($scope){
 		});
 
 	}
+
 
 	$scope.desfavoritarArtista = function(id) {
 		angular.forEach($scope.artistasFavoritos, function(artista, i){

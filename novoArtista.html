@@ -12,23 +12,33 @@
 </head>
 <body>
 	<div class="container" ng-controller="ArtistasController">
+		<h1 class="secao">Procurar artista no sistema</h1>
+
+		<!--table with search-->
+	
+	</div>
+	<div class="container" ng-controller="ArtistasController">
 		<h1 class="secao">{{ titulo }}</h1>
 		
 		<div class="lista">
 			<div class="filme com-cartaz" ng-repeat="artista in artistas">
 				<h1>{{ artista.nome }}</h1>
 				<button class="del" title="Excluir" ng-click="removerArtista(artista.id)"></button>
-				<button class= "fav" title="Favoritar Artista" ng-click="adicionarFavorito(artista.id)"></button>
+				<button class= "fav" title="Favoritar Artista" ng-click="adicionarFavorito(artista.id)">Favoritar</button>
 				<img ng-src="{{ artista.cartaz }}" alt="Cartaz de {{ artista.nome }}">
 				<ul>
 					<li><strong>Estilo musical:</strong> {{ artista.estilo }}</li>
 				</ul>
+				<u2>
+					<li><strong>Albuns:</strong></li>
+				</u2>
 			</div>	
 		</div>
 
 		<hr>
 
 		<div class="lista">
+			<h1 class="secao">Artistas Favoritos</h1>
 			<div class="filme com-cartaz" ng-repeat="artista in artistasFavoritos">
 				<h1>{{ artista.nome }}</h1>
 				<button class="del" title="Desfavoritar" ng-click="desfavoritarArtista(artista.id)"></button>

@@ -13,32 +13,38 @@
 <body>
 	
 	<div class="container" ng-controller="AlbunsController">
-		<h1>{{ titulo }}</h1>
+		<h1 class="secao">{{ titulo }}</h1>
 		
 		<div class="lista">
 			<div class="filme com-cartaz" ng-repeat="album in albuns">
-				<h1>{{ album.nomeDoAlbum }}</h1>
-				<button class="del" title="Excluir" ng-click="removerFilme(filme.id)"></button>
-				<img ng-src="{{ filme.cartaz }}" alt="Cartaz de {{ filme.titulo }}">
+				<h1>{{ album.titulo }}</h1>
+				<button class="del" title="Excluir" ng-click="removerAlbum(album.id)"></button>
+				<img ng-src="{{ album.cartaz }}" alt="Cartaz de {{ album.titulo }}">
 				<ul>
-					<li><strong>Ano:</strong> {{ filme.ano }}</li>
-					<li><strong>Produtora:</strong> {{ filme.produtora }}</li>
+					<li><strong>Ano:</strong> {{ album.ano }}</li>
+					<li><strong>Artista:</strong> {{ album.artista }}</li>
 				</ul>
-				<p>{{ filme.sinopse }}</p>
+				<h1> Músicas do Album </h1>
+				<u1 ng-repeat="musica in album.musicas">
+					<li><strong>Nome da música:</strong> {{ musica.nomeDaMusica }}</li>
+					<li><strong>Duração (em minutos):</strong> {{ musica.duracao}}</li>
+					<h6>&#013;</h6>
+				</u1>
+				
 			</div>	
 		</div>
 
 		<hr>
 
-		<form class="formularios" ng-submit="adicionarMusica()">
+		<form class="formularios" ng-submit="adiciona()">
 			<h1>Adicionar Música</h1>
 			<div class="form-campo">
 				<label for="titulo">Titulo da música</label>
-				<input type="text" id="titulo" ng-model="novaMusica.titulo">
+				<input type="text" id="titulo" ng-model="novaMusica.nomeDaMusica">
 			</div>
 			<div class="form-campo pequeno">
 				<label for="ano">Ano de Lançamento</label>
-				<input type="number" id="ano" ng-model="novoAlbum.anoDeLancamento">
+				<input type="number" id="ano" ng-model="novoAlbum.ano">
 			</div>
 			<div class="form-campo medio">
 				<label for="artista">Artista</label>
@@ -46,11 +52,18 @@
 			</div>
 			<div class="form-campo">
 				<label for="cartaz">Album</label>
-				<input type="text" id="cartaz" ng-model="novoAlbum.nomeDoAlbum">
+				<input type="text" id="cartaz" ng-model="novoAlbum.titulo">
 			</div>
 			<div class="form-campo">
 				<label for="duracao">Duração</label>
-				<input type="text" id="duracao" ng-model="novaMusica.duracao">
+				<input type="number" id="duracao" ng-model="novaMusica.duracao">
+			</div>
+
+			<div class="form-campo">
+				<label for="cartaz">Foto do Álbum</label>
+				<input type="text" id="cartaz" ng-model="novoAlbum.cartaz">
+
+
 			</div>
 
 			
@@ -60,6 +73,10 @@
 				<button type="submit">Salvar</button>
 			</footer>
 		</form>
+	</div>
+
+	<div class="voltar">
+		<form method="get" action="index.html"><button type="submit">Voltar</button></form>
 	</div>
 	
 </body>
