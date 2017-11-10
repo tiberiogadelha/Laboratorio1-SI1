@@ -1,34 +1,52 @@
-angular.module("Artistas").controller("ArtistasCtrl", function($scope){
-	$scope.artistas = [
+angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
+	$scope.artistas = [ 
 		{
-			id: "123123123",
+			id: "2321321",
 			nome: "Elvis Presley",
 			estilo: "Rock",
 			cartaz: "http://www.elvis.com/assets/images/photos/elvis/1950s/INV16714.jpg",
 			favorito: false,
 			albuns: [
-				{	
-					id: "32144",
-					titulo: "Nothing but the beat",
-					cartazAlbum: "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/David_Guetta_-_Nothing_but_the_Beat.png/220px-David_Guetta_-_Nothing_but_the_Beat.png",
-					ano: 2016,
-					musicas : [
+				{
+					id: "3100",
+					titulo: "Blue Hawaii",
+					cartazAlbum: "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Elvisbluehawaiisoundtrack.jpg/220px-Elvisbluehawaiisoundtrack.jpg",
+					ano: 1961,
+					musicas: [
 						{
-							nomeDaMusica: "without u",
-							duracao: 2
+							nomeDaMusica: "Can't Help Falling In Love",
+							duracao: 3
 						}
 					]
-
 				}
-
 			]
+		},
+		{
+			id: "9221",
+			nome: "David Guetta",
+			estilo: "Eletrônica",
+			cartaz: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/David_Guetta_2013-04-12_001.jpg/1200px-David_Guetta_2013-04-12_001.jpg",
+			favorito: true,
+			albuns: [
+				{
+					id: "2911111",
+					titulo: "Nothing but the beat",
+					cartazAlbum: "https://images-na.ssl-images-amazon.com/images/I/91OKWPQcuEL._SL1500_.jpg",
+					ano: 2010,
+					musicas: [
+						{
+							nomeDaMusica: "Without you",
+							duracao: 3
+						}
+					]
+				}
+			]
+
 		}
+
+
 	];
-
-	$scope.artistasFavoritos = [
-	]
-
-	
+		
 
 	$scope.novoArtista = {};
 	$scope.novaMusica = {};
@@ -110,7 +128,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope){
 
 		newAlbum.id= Date.now;
 		newAlbum.musicas = [];
-		
+
 		if(!newMusica.nomeDaMusica || !newMusica.duracao || !newAlbum.titulo || !newAlbum.artista || !newAlbum.ano || !newAlbum.cartazAlbum) {
 			window.alert("Preencha todos os campos!");
 			return;
@@ -173,5 +191,6 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope){
 		});
 	}
 
+	
 
 });
