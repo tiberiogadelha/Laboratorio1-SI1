@@ -1,43 +1,44 @@
 <!DOCTYPE html>
-<html ng-app="Albuns">
+<html ng-app="Artistas">
 <head>
 	<meta charset="UTF-8">
-	<title>Filmes que já assisti</title>
+	<title>Seção de Álbuns</title>
 	
 	<link rel="stylesheet" href="css/style.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-	<script src="js/albuns.module.js"></script>
-	<script src="js/albuns.controller.js"></script>
+	<script src="js/artistas.module.js"></script>
+	<script src="js/controller.js"></script>
 </head>
 <body>
 	
-	<div class="container" ng-controller="AlbunsController">
-		<h1 class="secao">{{ titulo }}</h1>
+	<div class="container" ng-controller="ArtistasCtrl">
+		<h1 class="secao">Álbuns Cadastrados</h1>
 		
 		<div class="lista">
-			<div class="filme com-cartaz" ng-repeat="album in albuns">
+			<div ng-repeat="artista in artistas">
+				<div class="artista com-cartaz" ng-repeat="album in artista.albuns">		
 				<h1>{{ album.titulo }}</h1>
-				<button class="del" title="Excluir" ng-click="removerAlbum(album.id)"></button>
-				<img ng-src="{{ album.cartaz }}" alt="Cartaz de {{ album.titulo }}">
+				<button class="del" title="Excluir" ng-click="removerAlbum(artista, album.titulo)"></button>
+				<img ng-src="{{ album.cartazAlbum }}" alt="Cartaz de {{ album.titulo }}">
 				<ul>
 					<li><strong>Ano:</strong> {{ album.ano }}</li>
-					<li><strong>Artista:</strong> {{ album.artista }}</li>
+					<li><strong>Artista:</strong> {{ artista.nome }}</li>
 				</ul>
 				<h1> Músicas do Album </h1>
-				<u1 ng-repeat="musica in album.musicas">
-					<li><strong>Nome da música:</strong> {{ musica.nomeDaMusica }}</li>
-					<li><strong>Duração (em minutos):</strong> {{ musica.duracao}}</li>
-					<h6>&#013;</h6>
-				</u1>
-				
+					<u1 ng-repeat="musica in album.musicas">
+						<li><strong>Nome da música:</strong> {{ musica.nomeDaMusica }}</li>
+						<li><strong>Duração (em minutos):</strong> {{ musica.duracao}}</li>
+						<h6>&#013;</h6>
+					</u1>
+				</div>
 			</div>	
 		</div>
 
 		<hr>
 
+		<h1 class="secao"> Adicionar Música </h1>
 		<form class="formularios" ng-submit="adiciona()">
-			<h1>Adicionar Música</h1>
 			<div class="form-campo">
 				<label for="titulo">Titulo da música</label>
 				<input type="text" id="titulo" ng-model="novaMusica.nomeDaMusica">
@@ -46,25 +47,26 @@
 				<label for="ano">Ano de Lançamento</label>
 				<input type="number" id="ano" ng-model="novoAlbum.ano">
 			</div>
-			<div class="form-campo medio">
-				<label for="artista">Artista</label>
-				<input type="text" id="artista" ng-model="novoAlbum.artista">
-			</div>
 			<div class="form-campo">
-				<label for="cartaz">Album</label>
+				<label for="cartaz">Álbum</label>
 				<input type="text" id="cartaz" ng-model="novoAlbum.titulo">
 			</div>
-			<div class="form-campo">
-				<label for="duracao">Duração</label>
+			<div class="form-campo pequeno">
+				<label for="duracao">Duração da música</label>
 				<input type="number" id="duracao" ng-model="novaMusica.duracao">
 			</div>
 
 			<div class="form-campo">
 				<label for="cartaz">Foto do Álbum</label>
-				<input type="text" id="cartaz" ng-model="novoAlbum.cartaz">
-
-
+				<input type="text" id="cartaz" ng-model="novoAlbum.cartazAlbum">
 			</div>
+
+			<div class="form-campo">
+				<label for="att"> Artista: </label>
+				<select ng-model="novoAlbum.artista" ng-options="artista.nome for artista in artistas">
+					<option value="">Selecione um artista</option>
+				</select>
+
 
 			
 

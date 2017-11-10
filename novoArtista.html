@@ -2,20 +2,20 @@
 <html ng-app="Artistas">
 <head>
 	<meta charset="UTF-8">
-	<title>Filmes que já assisti</title>
+	<title>Seção de Artistas</title>
 	
 	<link rel="stylesheet" href="css/style.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	<script src="js/artistas.module.js"></script>
-	<script src="js/artistas.controller.js"></script>
+	<script src="js/controller.js"></script>
 </head>
 <body>
-	<div class="container" ng-controller="ArtistasController">
-		<h1 class="secao">{{ titulo }}</h1>
+	<div class="container" ng-controller="ArtistasCtrl">
+		<h1 class="secao">Artistas cadastrados</h1>
 		
 		<div class="lista">
-			<div class="filme com-cartaz" ng-repeat="artista in artistas">
+			<div class="artista com-cartaz" ng-repeat="artista in artistas">
 				<h1>{{ artista.nome }}</h1>
 				<button class="del" title="Excluir" ng-click="removerArtista(artista.id)"></button>
 				<button class= "fav" title="Favoritar Artista" ng-click="adicionarFavorito(artista.id)">Favoritar</button>
@@ -25,30 +25,25 @@
 				</ul>
 				<u2>
 					<li><strong>Albuns:</strong></li>
-				</u2>
-			</div>	
+						<div class="album com-cartaz" ng-repeat="album in artista.albuns">
+							<h1>{{ album.titulo }}</h1>
+							<img ng-src="{{ album.cartazAlbum }}" alt="Cartaz de {{ album.titulo }}">
+							<ul>
+								<li><strong>Ano:</strong> {{ album.ano }}</li>
+							</ul>
+							<h1> Músicas do Album </h1>
+								<u1 ng-repeat="musica in album.musicas">
+									<li><strong>Nome da música:</strong> {{ musica.nomeDaMusica }}</li>
+									<li><strong>Duração (em minutos):</strong> {{ musica.duracao}}</li>
+									<h6>&#013;</h6>
+								</u1>
+								
+						</div>	
 		</div>
 
 		<hr>
-
-		<div class="lista">
-			<h1 class="secao">Artistas Favoritos</h1>
-			<div class="filme com-cartaz" ng-repeat="artista in artistasFavoritos">
-				<h1>{{ artista.nome }}</h1>
-				<button class="del" title="Desfavoritar" ng-click="desfavoritarArtista(artista.id)"></button>
-				<img ng-src="{{ artista.cartaz }}" alt="Cartaz de {{ artista.nome }}">
-				<ul>
-					<li><strong>Estilo musical:</strong> {{ artista.estilo }}</li>
-				</ul>
-			</div>
-		</div>
-
-
-
-		<hr>
-
+		<h1 class="secao">Adicionar Artista</h1>
 		<form class="formularios" ng-submit="adicionarArtista()">
-			<h1>Adicionar Artista</h1>
 			<div class="form-campo">
 				<label for="nome">Nome do artista</label>
 				<input type="text" id="nome" ng-model="novoArtista.nome">

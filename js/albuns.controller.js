@@ -34,7 +34,7 @@ angular.module("Albuns").controller("AlbunsController", function($scope){
 		var albumAux = null;
 
 		//Verifica se os campos estao validos
-		if(!newMusica.nomeDaMusica & !newMusica.duracao & !newAlbum.titulo & !newAlbum.artista & !newAlbum.ano & !newAlbum.cartaz) {
+		if(!newMusica.nomeDaMusica || !newMusica.duracao || !newAlbum.titulo || !newAlbum.artista || !newAlbum.ano || !newAlbum.cartaz) {
 			window.alert("Preencha todos os campos!");
 			return;
 		}

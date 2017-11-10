@@ -47,7 +47,7 @@ button {
 	border-radius: 5px;
 }
 
-.lista .filme {
+.lista .artista {
 	position: relative;
 	background-color: #C0C0C0;
 	border-radius: 10px;
@@ -56,12 +56,14 @@ button {
 	box-shadow: 0 0 10px rgba(0, 0, 0, .15);
 }
 
-.lista .filme.com-cartaz {
+.lista .artista.com-cartaz {
 	overflow: hidden;
 	padding-left: 200px;
+	margin-top: 5px;
+
 }
 
-.lista .filme .del {
+.lista .artista .del {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -75,15 +77,15 @@ button {
 	color: #FC6E51;
 }
 
-.lista .filme .del:hover {
+.lista .artista .del:hover {
 	color: #E9573F;
 }
 
-.lista .filme .del:after {
+.lista .artista .del:after {
 	content: '\00D7';
 }
 
-.lista .filme .fav {
+.lista .artista .fav {
 	position: relative;
 	top: 1;
 	right: 2;
@@ -97,11 +99,11 @@ button {
 	color: white;
 }
 
-.lista .filme .fav:hover {
+.lista .artista .fav:hover {
 	background-color: #A0D468;
 }
 
-.lista .filme img {
+.lista .artista img {
 	position: absolute;
 	width: 180px;
 
@@ -113,25 +115,25 @@ button {
 	transform: translateY(-50%);
 }
 
-.lista .filme h1 {
+.lista .artista h1 {
 	margin: 0;
 	font-size: 1.5em;
 }
 
-.lista .filme ul {
+.lista .artista ul {
 	padding: 0;
 	list-style-position: inside;
 }
 
-.lista .filme p {
+.lista .artista p {
 	margin: 0;
 }
 
 .formularios {
-	margin-top: 30px;
+	margin-top: 10px;
 	padding: 20px;
 	background-color: #C0C0C0;
-	border-radius: 3px;
+	border-radius: 5px;
 }
 
 .formularios h1 {
@@ -188,6 +190,7 @@ button {
 	width: 780px;
 	max-width: 90vw;
 	margin: 0 auto;
+	margin-top: 10px;
 	border-radius: 5px;
 }
 
@@ -198,13 +201,15 @@ button {
 	font-size: 2em;
 	max-width: 90vw;
 	margin: 0 auto;
-	background-color: #808080;
+	background-color: #D3D3D3;
 	border-radius: 5px;
+
 }
 
 .opcoes button[type="submit"] {
-	background-color: #C0C0C0;
+	background-color: #6C7B8B;
 	color: #FFFFFF;
+	margin-top: 5px;
 }
 
 .opcoes button[type="submit"]:hover {
@@ -217,5 +222,69 @@ button {
 	width: 100px;
 	max-width: 90vw;
 	margin: 0 auto;
+}
+
+.lista .album {
+	position: relative;
+	background-color: #2e7d32;
+	border-radius: 10px;
+	margin-bottom: 30px;
+	padding: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+	font-size: 10px;
+}
+
+.lista .album.com-cartaz {
+	overflow: hidden;
+	padding-left: 200px;
+}
+
+.lista .album .del {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	background-color: transparent;
+	font-size: 20px;
+	line-height: 10px;
+	padding: 10px;
+	font-weight: bold;
+	overflow: hidden;
+	color: #FC6E51;
+}
+
+.lista .album .del:hover {
+	color: #E9573F;
+}
+
+.lista .album .del:after {
+	content: '\00D7';
+}
+
+
+.lista .album img {
+	position: absolute;
+	width: 180px;
+
+	max-height: 260px;
+
+	top: 50%;
+	left: 0;
+
+	transform: translateY(-50%);
+}
+
+.lista .album h1 {
+	margin: 0;
+	font-size: 1.5em;
+}
+
+.lista .album ul {
+	padding: 0;
+	list-style-position: inside;
+}
+
+.lista .album p {
+	margin: 0;
 }
 

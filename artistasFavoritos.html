@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="Artistas">
+<head>
+	<meta charset="UTF-8">
+	<title>Seção de Artistas</title>
+	
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="js/artistas.module.js"></script>
+	<script src="js/controller.js"></script>
+</head>
+<body>
+	<div class="container" ng-controller="ArtistasCtrl">
+
+		<div class="lista">
+			<h1 class="secao">Artistas Favoritos</h1>
+			<div class="artista com-cartaz" ng-repeat="artista in artistas | filter:{favorito:true}">
+				<h1>{{ artista.nome }}</h1>
+				<button class="del" title="Desfavoritar" ng-click="desfavoritarArtista(artista.id)"></button>
+				<img ng-src="{{ artista.cartaz }}" alt="Cartaz de {{ artista.nome }}">
+				<ul>
+					<li><strong>Estilo musical:</strong> {{ artista.estilo }}</li> 
+				</ul>
+			</div>
+		</div>
+
+	<div class="voltar">
+		<form method="get" action="index.html"><button type="submit">Voltar</button></form>
+	</div>
+
+</body>
+</html>

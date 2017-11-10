@@ -1,17 +1,17 @@
 <html ng-app="Artistas">
 <head>
 	<meta charset="UTF-8">
-	<title>Filmes que já assisti</title>
+	<title>Pesquisar Artista</title>
 	
 	<link rel="stylesheet" href="css/style.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	<script src="js/artistas.module.js"></script>
-	<script src="js/artistas.controller.js"></script>
+	<script src="js/controller.js"></script>
 </head>
 <body>
 
-	<div class="container" ng-controller="ArtistasController">
+	<div class="container" ng-controller="ArtistasCtrl">
 		<h1 class="secao">Busca Artista </h1>
 		
 		<div class="lista">
@@ -22,7 +22,8 @@
 				</div>
 			</form>
 			
-			<div class="filme com-cartaz" ng-repeat="artista in artistas | filter:{nome:criteria}">
+			<div class="artista com-cartaz" ng-repeat="artista in artistas | filter:{nome:criteria}">
+				<div ng-repeat="album in artista.albuns">
 				<h1>{{ artista.nome }}</h1>
 				<button class="del" title="Excluir" ng-click="removerArtista(artista.id)"></button>
 				<button class= "fav" title="Favoritar Artista" ng-click="adicionarFavorito(artista.id)">Favoritar</button>
@@ -31,9 +32,15 @@
 					<li><strong>Estilo musical:</strong> {{ artista.estilo }}</li>
 				</ul>
 				<u2>
-					<li><strong>Albuns:</strong></li>
+					<li ><strong>Albuns:</strong></li>
+						<ol>
+							<li>{{album.titulo}}</li>
+						</ol>
+						
+
 				</u2>
 			</div>	
+		</div>
 		</div>
 
 		<div class="voltar">
