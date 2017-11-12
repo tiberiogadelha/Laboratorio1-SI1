@@ -53,6 +53,8 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 	$scope.novoAlbum = {};
 
 	$scope.removerArtista = function(id) {
+		console.log(id);
+		console.log("Oi");
 		angular.forEach($scope.artistas, function(artista, i){
 			if(artista.id == id){
 				$scope.artistas.splice(i, 1);
@@ -95,6 +97,12 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 	$scope.adicionarFavorito = function(id) {
 		angular.forEach($scope.artistas, function(artista){
 			if(artista.id == id){
+
+				if(artista.favorito == true) {
+					window.alert("O artista já está como favorito.");
+					return;
+				} 
+
 				artista.favorito = true;
 			}
 		});
@@ -103,7 +111,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 
 
 	$scope.desfavoritarArtista = function(id) {
-		angular.forEach($scope.artistasFavoritos, function(artista, i){
+		angular.forEach($scope.artistas, function(artista){
 			if(artista.id == id){
 				artista.favorito = false;
 			}

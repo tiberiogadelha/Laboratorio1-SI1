@@ -17,7 +17,7 @@
 			<h1 class="secao">Artistas Favoritos</h1>
 			<div class="artista com-cartaz" ng-repeat="artista in artistas | filter:{favorito:true}">
 				<h1>{{ artista.nome }}</h1>
-				<button class="del" title="Desfavoritar" ng-click="desfavoritarArtista(artista.id)"></button>
+				<button class="del" title="Desfavoritar" ng-click="desfavoritarArtista(artista.nome)"></button>
 				<img ng-src="{{ artista.cartaz }}" alt="Cartaz de {{ artista.nome }}">
 				<ul>
 					<li><strong>Estilo musical:</strong> {{ artista.estilo }}</li> 
