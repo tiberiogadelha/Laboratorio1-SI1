@@ -222,6 +222,7 @@ button {
 	width: 100px;
 	max-width: 90vw;
 	margin: 0 auto;
+	margin-top: 5px;
 }
 
 .lista .album {

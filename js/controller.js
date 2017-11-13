@@ -1,4 +1,5 @@
-angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
+angular.module("Artistas").controller("ArtistasCtrl", function($scope){
+
 	$scope.artistas = [ 
 		{
 			id: "2321321",
@@ -29,6 +30,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 			estilo: "Eletrônica",
 			cartaz: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/David_Guetta_2013-04-12_001.jpg/1200px-David_Guetta_2013-04-12_001.jpg",
 			favorito: true,
+			ultimaMusicaOuvida: "Without you",
 			albuns: [
 				{
 					id: "2911111",
@@ -42,7 +44,59 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 							artista: "David Guetta"
 						}
 					]
+				},
+				{
+					id: "116311",
+					titulo: "Listen Again",
+					cartazAlbum: "https://is2-ssl.mzstatic.com/image/thumb/Music62/v4/bf/a5/91/bfa59136-c2f6-b744-dcd0-5bd3f16e332e/mzm.iudugxpn.jpg/1200x630bb.jpg",
+					ano: 2014,
+					musicas: [
+						{	
+							nomeDaMusica: "Dangerous",
+							duracao: 4,
+							artista: "David Guetta"
+						},
+						{
+							nomeDaMusica: "What I did for love",
+							duracao: 3,
+							artista: "David Guetta"
+						}
+
+					]
+
 				}
+			]
+
+		},
+		{
+			id: "17422",
+			nome: "Anitta",
+			estilo: "Pop/Funk",
+			cartaz: "https://s1.vagalume.com/anitta/images/profile-bigw314.jpg",
+			favorito: true,
+			ultimaMusicaOuvida: "",
+			albuns: [
+				{
+					id: "119423",
+					titulo: "Bang",
+					cartazAlbum: "https://upload.wikimedia.org/wikipedia/en/thumb/1/15/Anitta_bang.jpg/220px-Anitta_bang.jpg",
+					ano: 2015,
+					musicas: [
+						{
+							nomeDaMusica: "Bang",
+							duracao: 3,
+							artista: "Anitta"
+						},
+
+						{
+							nomeDaMusica: "Deixa ele sofrer",
+							duracao: 4,
+							artista: "Anitta"
+						}
+
+					]
+				}
+
 			]
 
 		}
@@ -73,6 +127,10 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 	$scope.novaMusica = {};
 	$scope.novoAlbum = {};
 
+
+
+
+	// Recebe como parametro o id de um artista, depois remove o artista que tem aquele id.
 	$scope.removerArtista = function(id) {
 	
 		angular.forEach($scope.artistas, function(artista, i){
@@ -82,6 +140,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		});
 	}
 
+	// Adiciona um novo artista ao sistema, cujo dados foram passados em novoArtista.html
 	$scope.adicionarArtista = function(){
 		var artista = angular.copy($scope.novoArtista);
 		var seguro = "ok";
@@ -113,8 +172,9 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		}
 
 		$scope.novoArtista = {};
-	}
+	}	
 
+	// Torna um artista como sendo favorito, recebendo o id como parâmetro.
 	$scope.adicionarFavorito = function(id) {
 		angular.forEach($scope.artistas, function(artista){
 			if(artista.id == id){
@@ -130,7 +190,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 
 	}
 
-
+	// Tira o status de favorito de um artista, recebendo o id como parâmetro.
 	$scope.desfavoritarArtista = function(id) {
 		angular.forEach($scope.artistas, function(artista){
 			if(artista.id == id){
@@ -138,7 +198,9 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 			}
 		});
 	}
-	 // problema AQUI
+
+
+	 // Retorna o artista que tem o nome passado pelo parâmetro, e null caso o artista não exista no sistema.
 	buscaArtista = function(nome) {
 		var artistaProcurado = null;
 
@@ -151,6 +213,9 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		return artistaProcurado;
 	}
 
+	/* Adiciona uma nova música e/ou Álbum. 
+	* Depende se o álbum passado em novaMusica.html já existe.
+	*/
 	$scope.adicionaMusicaEAlbum = function() {
 		var newMusica = angular.copy($scope.novaMusica);
 		var newAlbum = angular.copy($scope.novoAlbum);
@@ -190,6 +255,8 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		$scope.novaMusica = {};
 	}
 
+
+	// Procura um álbum de determinado artista, e o retorna, caso for encontrado. Se não, retorna null.
 	buscaAlbum = function(tituloDoAlbum, artista) {
 		var albumProcurado = null;
 		
@@ -203,6 +270,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		return albumProcurado;
 	}
 
+	// Verifica se determinada música já foi cadastrada no álbum.
 	pesquisaMusicaNoAlbum = function(album, nomeDaMusica) {
 		var ehRepetida = false;
 		angular.forEach(album.musicas, function(musica) {
@@ -214,6 +282,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		return ehRepetida;
 	}
 
+	// Remove determinado álbum do sistema.
 	$scope.removerAlbum = function(artista, titulo) {
 		angular.forEach(artista.albuns, function(album, i){
 			if(album.titulo == titulo){
@@ -222,6 +291,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		});
 	}
 
+	//Adiciona uma nova playlist ao sistema, ou então, adiciona apenas a música desejada, caso a playlist já exista.
 	$scope.adicionarPlaylist = function() {
 		var playlist = angular.copy($scope.novaPlaylist);
 		playlist.duracao = 0;
@@ -236,6 +306,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		var playlistAtual = buscaPlaylist(playlist.nomeDaPlaylist);
 		var novaMusica = buscaMusicaNoSistema(playlist.musica);
 
+		// Se a playlist não existe, ela é criada.
 		if(playlistAtual == null) {
 			if(novaMusica != null) {
 				playlist.musicas.push(novaMusica);
@@ -247,7 +318,8 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 				window.alert("A música ainda não foi cadastrada no sistema!");
 				
 			}
-			
+
+		// Se existe, apenas a música é adicionada à playlist.
 		} else {
 			if(novaMusica != null) {
 				if(musicaEhRepetida(playlistAtual, playlist.musica) == true) {
@@ -265,7 +337,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		$scope.novaPlaylist = {};
 	}
 
-	//
+	// Procura determinada música no sistema, através do seu nome.
 	buscaMusicaNoSistema = function(nome) {
 		var musicaProcurada = null;
 
@@ -279,10 +351,12 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 				});
 			});
 		});
+
 		registraMusicaOuvida(musicaProcurada);
 		return musicaProcurada;
 	}
 
+	// Busca uma playlist no sistema, cujo nome foi passado como parâmetro. Se a playlist existir, a mesma é retornada. Se não, null é retornado.
 	buscaPlaylist = function(nome) {
 		var playlistProcurada = null;
 
@@ -296,6 +370,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		return playlistProcurada;
 	}
 
+	// Verifica se determinada música já está numa playlist.
 	musicaEhRepetida = function(playlist, nomeDaMusica) {
 		var ehRepetida = false;
 
@@ -309,11 +384,25 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		return ehRepetida;
 	}
 
+	// Registra a última música de um artista ouvida por um usuário 
 	registraMusicaOuvida = function(musica) {
 		if(musica != null) {
 			var artista = buscaArtista(musica.artista);
 			artista.ultimaMusicaOuvida = musica.nomeDaMusica;
 		}
+	}
+
+	// Remove uma música de uma playlist
+	$scope.removerMusicaDaPlaylist = function(nomeDaPlaylist, nomeDaMusica) {
+		var playlist = buscaPlaylist(nomeDaPlaylist);
+
+		angular.forEach(playlist.musicas, function(musica,i) {
+			if(musica.nomeDaMusica == nomeDaMusica) {
+				playlist.duracao -= musica.duracao;
+				playlist.musicas.splice(i,1);
+
+			}
+		});
 	}
 	
 

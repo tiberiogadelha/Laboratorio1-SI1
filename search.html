@@ -23,7 +23,6 @@
 			</form>
 			
 			<div class="artista com-cartaz" ng-repeat="artista in artistas | filter:{nome:criteria}">
-				<div ng-repeat="album in artista.albuns">
 				<h1>{{ artista.nome }}</h1>
 				<button class="del" title="Excluir" ng-click="removerArtista(artista.id)"></button>
 				<button class= "fav" title="Favoritar Artista" ng-click="adicionarFavorito(artista.id)">Favoritar</button>
@@ -32,11 +31,13 @@
 					<li><strong>Estilo musical:</strong> {{ artista.estilo }}</li>
 					
 				</ul>
-					<l1><strong>Última música ouvida:</strong> {{ artista.ultimaMusicaOuvida}}</li>
+					<li><strong>Última música ouvida:</strong> {{ artista.ultimaMusicaOuvida}}</li>
 					<li ><strong>Albuns:</strong></li>
-						<ol>
+						<div ng-repeat="album in artista.albuns">
+						<ul>
 							<li>{{album.titulo}}</li>
-						</ol>
+						</ul>
+					</div>
 						
 
 				</u2>

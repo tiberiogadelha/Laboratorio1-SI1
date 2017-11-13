@@ -17,11 +17,12 @@
 			<div class="artista com-cartaz" ng-repeat="playlist in playlists">
 				<h1>{{ playlist.nomeDaPlaylist }}</h1>
 				<img ng-src="{{ playlist.cartaz }}" alt="Cartaz de {{ artista.nome }}">
-				<h3>  Duração da playlist: {{ playlist.duracao}}</h3>
+				<h3>  Duração da playlist: {{ playlist.duracao + " minutos"}}</h3>
 
 				
 					<li><strong>Músicas:</strong></li>
 						<div class="album com-cartaz" ng-repeat="musica in playlist.musicas">
+							<button class="del" title="Excluir" ng-click="removerMusicaDaPlaylist(playlist.nomeDaPlaylist, musica.nomeDaMusica)"></button>
 							<h1>{{ musica.nomeDaMusica + " - " +  musica.duracao + " Minutos" }}</h1>
 								
 						</div>	
