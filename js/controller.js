@@ -6,6 +6,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 			estilo: "Rock",
 			cartaz: "http://www.elvis.com/assets/images/photos/elvis/1950s/INV16714.jpg",
 			favorito: false,
+			ultimaMusicaOuvida: "Can't Help Falling In Love",
 			albuns: [
 				{
 					id: "3100",
@@ -15,7 +16,8 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 					musicas: [
 						{
 							nomeDaMusica: "Can't Help Falling In Love",
-							duracao: 3
+							duracao: 3,
+							artista: "Elvis Presley"
 						}
 					]
 				}
@@ -36,7 +38,8 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 					musicas: [
 						{
 							nomeDaMusica: "Without you",
-							duracao: 3
+							duracao: 3,
+							artista: "David Guetta"
 						}
 					]
 				}
@@ -46,15 +49,32 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 
 
 	];
+
+	$scope.playlists = [
+		{
+			nomeDaPlaylist: "Melhores de 2018",
+			duracao: 3,
+			cartaz: "https://http2.mlstatic.com/forma-carinha-feliz-smile-12-cavidades-em-aluminio-D_NQ_NP_433711-MLB20614913319_032016-O.jpg",
+			musicas: [
+				{
+					nomeDaMusica: "Without you",
+					duracao: 3,
+					artista: "David Guetta"
+				}
+			]
+		}
+
+
+	]
 		
 
+	$scope.novaPlaylist = {};
 	$scope.novoArtista = {};
 	$scope.novaMusica = {};
 	$scope.novoAlbum = {};
 
 	$scope.removerArtista = function(id) {
-		console.log(id);
-		console.log("Oi");
+	
 		angular.forEach($scope.artistas, function(artista, i){
 			if(artista.id == id){
 				$scope.artistas.splice(i, 1);
@@ -67,6 +87,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		var seguro = "ok";
 
 		artista.albuns = [];
+		artista.ultimaMusicaOuvida = "";
 		artista.favorito = false;
 		artista.albuns.musicas = [];
 		artista.id = Date.now();
@@ -130,9 +151,10 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 		return artistaProcurado;
 	}
 
-	$scope.adiciona = function() {
+	$scope.adicionaMusicaEAlbum = function() {
 		var newMusica = angular.copy($scope.novaMusica);
 		var newAlbum = angular.copy($scope.novoAlbum);
+
 
 		newAlbum.id= Date.now;
 		newAlbum.musicas = [];
@@ -144,6 +166,7 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 
 		var artista = buscaArtista(newAlbum.artista.nome);
 		var album = buscaAlbum(newAlbum.titulo, artista);
+		newMusica.artista = artista.nome;
 
 		//1º caso: Album ainda nao existe no sistema
 		if(album == null) {
@@ -198,6 +221,103 @@ angular.module("Artistas").controller("ArtistasCtrl", function($scope, $http){
 			}
 		});
 	}
+
+	$scope.adicionarPlaylist = function() {
+		var playlist = angular.copy($scope.novaPlaylist);
+		playlist.duracao = 0;
+		playlist.musicas = [];
+		
+
+		if(!playlist.nomeDaPlaylist || !playlist.musica || !playlist.cartaz) {
+			window.alert("Preencha todos os campos");
+			return;
+		}
+
+		var playlistAtual = buscaPlaylist(playlist.nomeDaPlaylist);
+		var novaMusica = buscaMusicaNoSistema(playlist.musica);
+
+		if(playlistAtual == null) {
+			if(novaMusica != null) {
+				playlist.musicas.push(novaMusica);
+				playlist.duracao = novaMusica.duracao;
+				$scope.playlists.push(playlist);
+				window.alert("PlayList criada com sucesso!");
+
+			} else {
+				window.alert("A música ainda não foi cadastrada no sistema!");
+				
+			}
+			
+		} else {
+			if(novaMusica != null) {
+				if(musicaEhRepetida(playlistAtual, playlist.musica) == true) {
+					window.alert("A música já está na playlist.");
+				} else {
+					playlistAtual.duracao += novaMusica.duracao;
+					playlistAtual.musicas.push(novaMusica);
+					window.alert("Nova música adicionada na playlist: " + playlistAtual.nomeDaPlaylist);
+				}
+			} else {
+				window.alert("A música ainda não foi cadastrada no sistema!");
+			}
+		}
+
+		$scope.novaPlaylist = {};
+	}
+
+	//
+	buscaMusicaNoSistema = function(nome) {
+		var musicaProcurada = null;
+
+
+		angular.forEach($scope.artistas, function(artista) {
+			angular.forEach(artista.albuns, function(album) {
+				angular.forEach(album.musicas, function(musica) {
+					if(musica.nomeDaMusica == nome) {
+						musicaProcurada = musica;
+					}
+				});
+			});
+		});
+		registraMusicaOuvida(musicaProcurada);
+		return musicaProcurada;
+	}
+
+	buscaPlaylist = function(nome) {
+		var playlistProcurada = null;
+
+		angular.forEach($scope.playlists, function(playlistAtual) {
+			if(playlistAtual.nomeDaPlaylist == nome) {
+				playlistProcurada = playlistAtual;
+				
+			}
+		});
+
+		return playlistProcurada;
+	}
+
+	musicaEhRepetida = function(playlist, nomeDaMusica) {
+		var ehRepetida = false;
+
+		angular.forEach(playlist.musicas, function(musica) {
+		
+			if(musica.nomeDaMusica == nomeDaMusica) {
+				ehRepetida = true;
+			}
+		});
+			
+		return ehRepetida;
+	}
+
+	registraMusicaOuvida = function(musica) {
+		if(musica != null) {
+			var artista = buscaArtista(musica.artista);
+			artista.ultimaMusicaOuvida = musica.nomeDaMusica;
+		}
+	}
+	
+
+
 
 	
 

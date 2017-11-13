@@ -1,7 +1,7 @@
-<html ng-app:"Artistas">
+<html ng-app="Artistas">
 <head>
 	<meta charset="UTF-8">
-	<title>Seção de PlayLists</title>
+	<title>Seção de Artistas</title>
 	
 	<link rel="stylesheet" href="css/style.css">
 
@@ -9,8 +9,54 @@
 	<script src="js/artistas.module.js"></script>
 	<script src="js/controller.js"></script>
 </head>
-<body ng-controller:"ArtistasCtrl">
-	<h1 class="secao">Seção de PlayList</h1>
+<body>
+	<div class="container" ng-controller="ArtistasCtrl">
+		<h1 class="secao">Minhas Playlists</h1>
+		
+		<div class="lista">
+			<div class="artista com-cartaz" ng-repeat="playlist in playlists">
+				<h1>{{ playlist.nomeDaPlaylist }}</h1>
+				<img ng-src="{{ playlist.cartaz }}" alt="Cartaz de {{ artista.nome }}">
+				<h3>  Duração da playlist: {{ playlist.duracao}}</h3>
 
+				
+					<li><strong>Músicas:</strong></li>
+						<div class="album com-cartaz" ng-repeat="musica in playlist.musicas">
+							<h1>{{ musica.nomeDaMusica + " - " +  musica.duracao + " Minutos" }}</h1>
+								
+						</div>	
+		</div>
+
+		<hr>
+
+		<h1 class="secao"> Adicionar Playlist </h1>
+		<form class="formularios" ng-submit="adicionarPlaylist()">
+			<div class="form-campo">
+				<label for="titulo">Titulo da playlist</label>
+				<input type="text" id="titulo" ng-model="novaPlaylist.nomeDaPlaylist">
+			</div>
+		
+
+			<div class="form-campo">
+				<label for="cartaz">Figura para a playlist</label>
+				<input type="text" id="cartaz" ng-model="novaPlaylist.cartaz">
+			</div>
+
+			<div class="form-campo">
+				<label for="att"> Música: </label>
+				<input type="text" id="musica" ng-model="novaPlaylist.musica">
+			</div>
+
+			<footer>
+				<button type="reset">Limpar</button>
+				<button type="submit">Salvar</button>
+			</footer>
+		</form>
+	</div>
+
+<div class="voltar">
+		<form method="get" action="index.html"><button type="submit">Voltar</button></form>
+	</div>
+	
 </body>
 </html>
